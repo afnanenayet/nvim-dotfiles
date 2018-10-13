@@ -2,13 +2,10 @@
 " client plugin
 
 " language server commands
-" \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-" \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-" \ 'cpp': ['clangd'],
 let g:LanguageClient_serverCommands = {
-            \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-            \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
-            \ 'python': ['/Users/aenayet/pyenv/nvim3/bin/pyls', '--log-file', '/tmp/pyls3.log', '-v'],
+            \ 'cpp': ['cquery'],
+            \ 'c': ['cquery'],
+            \ 'python': ['/Users/aenayet/pyenv/nvim3/bin/pyls'],
             \ 'rust': ['rustup', 'run', 'stable', 'rls'],
             \ 'haskell': ['hie-wrapper']
             \ }

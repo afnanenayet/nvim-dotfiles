@@ -28,7 +28,6 @@ if dein#load_state('/Users/aenayet/.cache/dein')
 	call dein#add('cloudhead/neovim-fuzzy')
 	call dein#add('neomutt/neomutt.vim')
 	call dein#add('junegunn/fzf')
-	call dein#add('zchee/deoplete-jedi')
 	call dein#add('alaric/neovim-visor')
 	call dein#add('christoomey/vim-tmux-navigator')
 	call dein#add('autozimu/LanguageClient-neovim', {

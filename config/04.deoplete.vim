@@ -9,8 +9,9 @@ let g:deoplete#enable_smart_case = 1
 let b:deoplete_disable_auto_complete=1
 let g:deoplete_disable_auto_complete=1
 
-" call deoplete#custom#buffer_option('auto_complete', v:false)
-" call deoplete#custom#source('LanguageClient', \ 'min_pattern_length', \ 2)
+call deoplete#custom#source('LanguageClient',
+            \ 'min_pattern_length',
+            \ 2)
 
 if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
@@ -22,14 +23,14 @@ call deoplete#custom#source('_',
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" set sources
-let g:deoplete#sources = {}
-let g:deoplete#sources.cpp = ['LanguageClient']
-let g:deoplete#sources.python = ['LanguageClient']
-let g:deoplete#sources.python3 = ['LanguageClient']
-let g:deoplete#sources.rust = ['LanguageClient']
-let g:deoplete#sources.c = ['LanguageClient']
-let g:deoplete#sources.vim = ['vim']
+call deoplete#custom#option('sources', {
+            \ 'python': ['LanguageClient'],
+            \ 'python3': ['LanguageClient'],
+            \ 'cpp': ['LanguageClient'],
+            \ 'c': ['LanguageClient'],
+            \ 'rust': ['LanguageClient'],
+            \ 'vim': ['vim'],
+            \})
 
 " ignored sources
 let g:deoplete#ignore_sources = {}
