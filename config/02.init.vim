@@ -30,15 +30,16 @@ set clipboard+=unnamedplus
 " Tab = 4 spaces
 set tabstop=4
 set shiftwidth=4
-set sta
-set et
-set sts=4
+" set sta
+set expandtab
+set sts=4 " softtabstop, makes spaces feel like tabs when deleting
 
 " enable mouse support
 set mouse=a mousemodel=popup
 
 " markdown file recognition
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.md.html set filetype=markdown
 
 " relative line numbers
 " Sets relative line numbers in normal mode, absolute line numbers in insert
@@ -48,10 +49,6 @@ set relativenumber
 
 " use ripgreg instead of grep
 set grepprg=rg\ --vimgrep
-
-" python packages in venv
-let g:python_host_prog = '/Users/aenayet/.virtualenvs/nvim2/bin/python'
-let g:python3_host_prog = '/Users/aenayet/.virtualenvs/nvim3/bin/python'
 
 " Set colors in terminal
 " Solarized, dark, with true color support
@@ -78,3 +75,7 @@ let g:ale_linters_explicit = 1
 " terminal settings
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
+
+" markdown settings
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_math = 0

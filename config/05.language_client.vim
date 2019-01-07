@@ -5,7 +5,7 @@
 let g:LanguageClient_serverCommands = {
             \ 'cpp': ['cquery'],
             \ 'c': ['cquery'],
-            \ 'python': ['/Users/aenayet/pyenv/nvim3/bin/pyls'],
+            \ 'python': ['/home/afnan/.virtualenvs/lang-server/bin/pyls'],
             \ 'rust': ['rustup', 'run', 'stable', 'rls'],
             \ 'haskell': ['hie-wrapper']
             \ }
@@ -14,10 +14,11 @@ let g:LanguageClient_rootMarkers = {
             \ 'cpp': ['compile_commands.json', 'build'],
             \ 'c': ['compile_commands.json', 'build'],
             \ 'haskell': ['*.cabal', 'stack.yaml'],
+            \ 'rust': ['Cargo.toml'],
             \ }
 
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
 let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = '/Users/aenayet/.config/nvim/settings.json'
+let g:LanguageClient_settingsPath = '/home/afnan/.config/nvim/settings.json'
