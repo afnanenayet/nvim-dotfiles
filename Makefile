@@ -10,4 +10,5 @@ all:
 	echo "Copying files..."
 	cp -f $(HOME)/.config/nvim/init.vim .
 	cp -rf $(HOME)/.config/nvim/config .
+	cp -rf $(HOME)/.config/nvim/ftplugin .
 	echo "Files have been copied successfully."

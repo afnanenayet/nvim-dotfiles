@@ -34,4 +34,4 @@ call deoplete#custom#option('sources', {
 
 " ignored sources
 let g:deoplete#ignore_sources = {}
-let g:deoplete#ignore_sources._ = ['buffer', 'around']
+let g:deoplete#ignore_sources._ = ['buffer', 'around', 'tag']

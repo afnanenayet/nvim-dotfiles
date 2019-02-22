@@ -29,7 +29,7 @@ nnoremap <silent> gf :call LanguageClient_textDocument_codeAction()<CR>
 nmap <F8> <Plug>(ale_fix)
 
 " fzy
-nnoremap <C-p> :FuzzyOpen .<CR>
+nnoremap <C-p> :FuzzyOpen<CR>
 nnoremap <C-s> :FuzzyGrep<CR>
 "
 

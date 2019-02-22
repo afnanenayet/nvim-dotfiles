@@ -31,6 +31,7 @@ if dein#load_state('/home/afnan/.cache/dein')
     call dein#add('christoomey/vim-tmux-navigator')
     call dein#add('plasticboy/vim-markdown')
     call dein#add('jamessan/vim-gnupg')
+    call dein#add('daeyun/vim-matlab')
     call dein#add('autozimu/LanguageClient-neovim', {
                 \ 'rev': 'next',
                 \ 'build': 'bash install.sh',
