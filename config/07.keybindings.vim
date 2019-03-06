@@ -18,12 +18,15 @@ map <C-n> :NERDTreeToggle<CR>
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " keybindings for language client
+nnoremap <F4> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
 nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 nnoremap <silent> gf :call LanguageClient_textDocument_codeAction()<CR>
+nnoremap <silent> gc :call LanguageClient_textDocument_formatting()<CR>
+
 
 " ALE
 nmap <F8> <Plug>(ale_fix)
@@ -31,7 +34,6 @@ nmap <F8> <Plug>(ale_fix)
 " fzy
 nnoremap <C-p> :FuzzyOpen<CR>
 nnoremap <C-s> :FuzzyGrep<CR>
-"
 
 " neosnippets
 imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
@@ -39,20 +41,15 @@ imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 
 " For conceal markers.
-"if has('conceal')
-  "set conceallevel=2 concealcursor=niv
-"endif
 set conceallevel=0
-
-" neovim visor
-let g:neovim_visor_key = '<C-a>'
 
 " change working directory to where the file in the buffer is located
 " if user types `,cd`
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
-" <ESC> exits in terminal mode
-tnoremap <ESC> <C-\><C-n><C-w><C-p>
-
 " Easy most-recent-buffer switching
 nnoremap <Tab> :buffers<CR>:buffer<Space>
+
+" switch buffers
+map <C-[> :bp<CR>
+map <C-]> :bn<CR>
