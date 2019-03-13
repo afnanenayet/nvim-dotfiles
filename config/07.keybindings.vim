@@ -39,7 +39,9 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
             \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers.
-set conceallevel=0
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 " change working directory to where the file in the buffer is located
 " if user types `,cd`

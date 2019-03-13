@@ -11,3 +11,6 @@ setlocal tabstop=2
 setlocal shiftwidth=2
 nnoremap <buffer> <silent> gc :ALEfix<CR>
 let b:ale_fix_on_save = 1
+
+" Personal preference, I like to see the formatting modifiers
+setlocal conceallevel = 0
