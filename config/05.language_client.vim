@@ -3,8 +3,8 @@
 
 " language server commands
 let g:LanguageClient_serverCommands = {
-            \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-            \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
+            \ 'cpp': ['ccls'],
+            \ 'c': ['ccls'],
             \ 'python': ['/home/afnan/.virtualenvs/lang_server/bin/pyls'],
             \ 'rust': ['ra_lsp_server'],
             \ 'haskell': ['hie-wrapper']

@@ -1,5 +1,3 @@
-set tags=tags;
-
 " ALE settings
 
 " ALE linters
