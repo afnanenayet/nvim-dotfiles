@@ -4,13 +4,13 @@ let b:deoplete_disable_auto_complete = 1
 setlocal spell
 setlocal spellsuggest
 set textwidth=79
-set formatexpr=
+setlocal formatexpr=
 
 " set tabwidth = 2 spaces for markdown
 setlocal tabstop=2
 setlocal shiftwidth=2
-nnoremap <buffer> <silent> gc :ALEfix<CR>
-let b:ale_fix_on_save = 1
+nnoremap <buffer> <silent> gc :ALEFix<CR>
+let b:ale_fix_on_save=1
 
 " Personal preference, I like to see the formatting modifiers
-setlocal conceallevel = 0
+setlocal conceallevel=0
