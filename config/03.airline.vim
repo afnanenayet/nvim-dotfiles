@@ -1,5 +1,5 @@
-" vim powerline options
-let g:airline_theme='solarized'
+" vim airline options
+let g:airline_theme='luna'
 
 " don't overwrite symbols if they already exist
 if !exists('g:airline_symbols')
@@ -25,7 +25,7 @@ let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" powerline symbols
+" airline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
