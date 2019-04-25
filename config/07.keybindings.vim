@@ -14,8 +14,9 @@ nnoremap <C-H> <C-W><C-H>
 " autocmd vimenter * NERDTree " start nerdtree automatically when vim starts up
 map <C-n> :NERDTreeToggle<CR>
 
-" deoplete tab-complete
+" tab-completion
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " keybindings for language client
 nnoremap <F4> :call LanguageClient_contextMenu()<CR>
@@ -35,8 +36,13 @@ nnoremap <C-s> :FuzzyGrep<CR>
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+            "\ '\<Plug>(neosnippet_expand_or_jump)' : '\<TAB>'
+
+
+" Expand snippet when you hit enter on an entry
+inoremap <silent> <expr> <CR> ncm2_neosnippet#expand_or("\<CR>", 'n')
+inoremap <c-c> <ESC>
 
 " For conceal markers.
 if has('conceal')

@@ -12,7 +12,7 @@ syntax on
 set backspace=indent,eol,start
 
 " Enable line numbers
-set nu
+set number
 
 " Enable line/column info at bottom
 set ruler
@@ -21,7 +21,7 @@ set cursorline " highlights current line
 set scrolloff=10
 
 " Autoindentation
-set ai
+set autoindent
 filetype indent plugin on
 
 " Copies using system clipboard
@@ -79,3 +79,5 @@ autocmd BufLeave term://* stopinsert
 " markdown settings
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_math = 0
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_no_default_key_mappings = 1
