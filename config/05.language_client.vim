@@ -6,7 +6,7 @@
 let g:LanguageClient_serverCommands = {
             \ 'cpp': ['ccls'],
             \ 'c': ['ccls'],
-            \ 'python': ['mspyls'],
+            \ 'python': ['pyls'],
             \ 'rust': ['rls'],
             \ 'haskell': ['hie-wrapper'],
             \ 'javascript': ['javascript-typescript-stdio'],
