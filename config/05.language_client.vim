@@ -19,6 +19,7 @@ let g:LanguageClient_rootMarkers = {
             \ 'c': ['compile_commands.json', 'build', '.ccls', '.git'],
             \ 'haskell': ['*.cabal', 'stack.yaml'],
             \ 'rust': ['Cargo.toml', '.git'],
+            \ 'python' : ['.git'],
             \ }
 
 set completefunc=LanguageClient#complete

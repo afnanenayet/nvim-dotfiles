@@ -19,6 +19,7 @@ set ruler
 set cursorline " highlights current line
 
 set scrolloff=10
+set updatetime=300
 
 " Autoindentation
 set autoindent
@@ -32,7 +33,7 @@ set tabstop=4
 set shiftwidth=4
 " set sta
 set expandtab
-set sts=4 " softtabstop, makes spaces feel like tabs when deleting
+set softtabstop=4 " softtabstop, makes spaces feel like tabs when deleting
 
 " enable mouse support
 set mouse=a mousemodel=popup
@@ -53,7 +54,7 @@ set grepprg=rg\ --vimgrep
 " Set colors in terminal
 " Solarized, dark, with true color support
 set termguicolors
-set background=dark
+"set background=dark
 colorscheme NeoSolarized
 
 " close vim if only window left is nerdtree
@@ -76,8 +77,13 @@ let g:ale_linters_explicit = 1
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
+
 " markdown settings
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_math = 0
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_no_default_key_mappings = 1
+
+" some language servers have problems with backup files
+set nobackup
+set nowritebackup
