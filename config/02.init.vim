@@ -16,10 +16,13 @@ set number
 
 " Enable line/column info at bottom
 set ruler
-set cursorline " highlights current line
+"set cursorline " highlights current line
 
 set scrolloff=10
 set updatetime=300
+
+set nobackup
+set nowritebackup
 
 " Autoindentation
 set autoindent
@@ -34,6 +37,7 @@ set shiftwidth=4
 " set sta
 set expandtab
 set softtabstop=4 " softtabstop, makes spaces feel like tabs when deleting
+set cursorline
 
 " enable mouse support
 set mouse=a mousemodel=popup
@@ -65,6 +69,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 au FileType crontab setlocal bkc=yes
 
 set hidden
+set nomodeline  " the modeline well-known security risk
 
 " Disable completion where available from ALE
 " (not worth creating a separate file just for a one-liner)

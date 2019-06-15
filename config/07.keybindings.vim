@@ -1,6 +1,9 @@
 " Use ; for commands
 nnoremap ; :
 
+" Use the spacebar as the leader key instead of `\`
+map <Space> <Leader>
+
 " split pane navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -13,36 +16,52 @@ nnoremap <C-H> <C-W><C-H>
 " nerdtree
 " autocmd vimenter * NERDTree " start nerdtree automatically when vim starts up
 map <C-n> :NERDTreeToggle<CR>
+command! -nargs=0 Format :call CocAction('format')
 
-" tab-completion
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" keybindings for language client
-nnoremap <F4> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
-nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> gf :call LanguageClient_textDocument_codeAction()<CR>
-nnoremap <silent> gc :call LanguageClient_textDocument_formatting()<CR>
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gc :call CocAction('format')<CR>
 
 " fzy
 nnoremap <C-p> :FuzzyOpen<CR>
 nnoremap <C-s> :FuzzyGrep<CR>
 
 " neosnippets
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            "\ '\<Plug>(neosnippet_expand_or_jump)' : '\<TAB>'
+imap <C-l> <Plug>(coc-snippets-expand)
+imap <C-k> <Plug>(coc-snippets-expand-jump)
+inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
-" Expand snippet when you hit enter on an entry
-inoremap <silent> <expr> <CR> ncm2_neosnippet#expand_or("\<CR>", 'n')
-inoremap <c-c> <ESC>
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json,cpp,c,python,rust setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " For conceal markers.
 if has('conceal')

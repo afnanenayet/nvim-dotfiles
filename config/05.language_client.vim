@@ -22,7 +22,7 @@ let g:LanguageClient_rootMarkers = {
             \ 'python' : ['.git'],
             \ }
 
-set completefunc=LanguageClient#complete
+"set completefunc=LanguageClient#complete
 
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath = '/home/afnan/.config/nvim/settings.json'
