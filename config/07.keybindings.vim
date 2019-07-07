@@ -15,15 +15,15 @@ nnoremap <C-H> <C-W><C-H>
 
 " nerdtree
 " autocmd vimenter * NERDTree " start nerdtree automatically when vim starts up
-map <C-n> :NERDTreeToggle<CR>
 command! -nargs=0 Format :call CocAction('format')
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gc :call CocAction('format')<CR>
+nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rf <Plug>(coc-references)
 
 " fzy
 nnoremap <C-p> :FuzzyOpen<CR>
@@ -78,3 +78,8 @@ nnoremap <Tab> :buffers<CR>:buffer<Space>
 " switch buffers
 map <C-9> :bp<CR>
 map <C-0> :bn<CR>
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
