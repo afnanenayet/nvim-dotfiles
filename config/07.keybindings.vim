@@ -26,8 +26,8 @@ nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>rf <Plug>(coc-references)
 
 " fzy
-nnoremap <C-p> :FuzzyOpen<CR>
-nnoremap <C-s> :FuzzyGrep<CR>
+nnoremap <C-p> :Files<Cr>
+nnoremap <C-s> :Rg<CR>
 
 " neosnippets
 imap <C-l> <Plug>(coc-snippets-expand)
