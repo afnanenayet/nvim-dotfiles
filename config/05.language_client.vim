@@ -20,4 +20,4 @@ set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 
 let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = '/home/swilson/.config/nvim/settings.json'
+let g:LanguageClient_settingsPath = '/Users/swilson/.config/nvim/settings.json'

@@ -50,8 +50,8 @@ set relativenumber
 set grepprg=rg\ --vimgrep
 
 " python packages in venv
-let g:python_host_prog = '/home/swilson/.python_environments/nvim2/bin/python'
-let g:python3_host_prog = '/home/swilson/.python_environments/nvim3/bin/python'
+let g:python_host_prog = '/Users/swilson/.python_environments/nvim2/bin/python'
+let g:python3_host_prog = '/Users/swilson/.python_environments/nvim3/bin/python'
 
 " Set colors in terminal
 " Solarized, dark, with true color support
