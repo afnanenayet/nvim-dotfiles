@@ -28,6 +28,7 @@ nmap <leader>rf <Plug>(coc-references)
 " fzy
 nnoremap <C-p> :Files<Cr>
 nnoremap <C-s> :Rg<CR>
+nnoremap <C-m> :Marks<CR>
 
 " neosnippets
 imap <C-l> <Plug>(coc-snippets-expand)
@@ -73,7 +74,7 @@ endif
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 " Easy most-recent-buffer switching
-nnoremap <Tab> :buffers<CR>:buffer<Space>
+nnoremap <Tab> :Buffers<CR>
 
 " switch buffers
 map <C-9> :bp<CR>
