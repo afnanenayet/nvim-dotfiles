@@ -52,14 +52,6 @@
                 }
             }
         },
-        "digestif": {
-            "command": "digestif",
-            "filetypes": [
-                "tex",
-                "plaintex",
-                "context"
-            ]
-        },
         "golang": {
             "command": "gopls",
             "rootPatterns": [
