@@ -47,20 +47,20 @@
             "rootPatterns": [
                 ".stack.yaml",
                 "cabal.config",
-                "package.yaml"
+                "package.yaml",
+                ".hie-bios",
+                "BUILD.bazel"
             ],
             "filetypes": [
                 "hs",
                 "lhs",
                 "haskell"
             ],
-            "initializationOptions": {},
             "settings": {
                 "languageServerHaskell": {
                     "hlintOn": false,
                     "maxNumberOfProblems": 10,
-                    "completionSnippetsOn": true,
-                    "formattingProvider": "brittany"
+                    "completionSnippetsOn": true
                 }
             }
         },

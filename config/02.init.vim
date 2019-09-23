@@ -1,7 +1,6 @@
-" init.vim contains all of the initialization plugins for vim
-" note that this has to be sourced second since dein needs to
-" run its scripts first. This contains misc startup settings
-" for vim
+" init.vim contains all of the initialization plugins for vim note that this
+" has to be sourced second since dein needs to run its scripts first. This
+" contains misc startup settings for vim
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set shell=/bin/sh
@@ -17,7 +16,6 @@ set number
 
 " Enable line/column info at bottom
 set ruler
-"set cursorline " highlights current line
 
 set scrolloff=10
 set updatetime=300
@@ -62,27 +60,16 @@ set termguicolors
 "set background=dark
 colorscheme NeoSolarized
 
-" close vim if only window left is nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 " crontab filetype tweak (the way vim normally saves files confuses crontab
 " so this workaround allows for editing
 au FileType crontab setlocal bkc=yes
 
 set hidden
-set nomodeline  " the modeline well-known security risk
-
-" Disable completion where available from ALE
-" (not worth creating a separate file just for a one-liner)
-let g:ale_completion_enabled = 0
-
-" Only run linters named in ale_linters settings.
-let g:ale_linters_explicit = 1
+set nomodeline  " the modeline is a well-known security risk
 
 " terminal settings
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
-
 
 " markdown settings
 let g:vim_markdown_conceal = 0
