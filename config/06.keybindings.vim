@@ -115,3 +115,6 @@ map <C-0> :bn<CR>
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
+
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>h :split<CR>

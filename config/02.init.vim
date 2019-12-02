@@ -80,3 +80,7 @@ let g:vim_markdown_no_default_key_mappings = 1
 " some language servers have problems with backup files
 set nobackup
 set nowritebackup
+
+" more natural splits
+set splitbelow
+set splitright
