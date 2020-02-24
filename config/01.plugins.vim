@@ -32,6 +32,7 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('neovimhaskell/haskell-vim')
 call dein#add('tpope/vim-eunuch')
 call dein#add('rust-lang/rust.vim')
+
 " exit dein
 call dein#end()
 " auto-install missing packages on startup

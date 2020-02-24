@@ -70,5 +70,6 @@
     },
     "coc.source.around.enable": false,
     "coc.source.buffer.enable": false,
-    "python.jediEnabled": false
+    "python.jediEnabled": false,
+    "rust-analyzer.raLspServerPath": "/usr/bin/ra_lsp_server"
 }
