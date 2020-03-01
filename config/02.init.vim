@@ -90,7 +90,7 @@ set inccommand=nosplit
 
 " ripgrep
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)  
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " Overriding fzf.vim's default :Files command.  Pass zero or one args to Files
 " command (which are then passed to Fzf_dev). Supports file path completion
@@ -119,12 +119,12 @@ function! Fzf_dev(qargs)
 
     return l:result
   endfunction
-  
+
   function! s:edit_file(lines)
     let l:cmd = get({'ctrl-x': 'split',
                  \ 'ctrl-v': 'vertical split',
                  \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
-    
+
     for l:item in a:lines[1:]
       let l:file_path = l:item
       execute 'silent ' . l:cmd . ' ' . l:file_path

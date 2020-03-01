@@ -1,6 +1,3 @@
-" Use ; for commands
-nnoremap ; :
-
 " Use the spacebar as the leader key instead of `\`
 map <Space> <Leader>
 
@@ -106,7 +103,8 @@ endif
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 " Easy most-recent-buffer switching
-nnoremap <Tab> :CocList buffers<CR>
+nnoremap <Tab> :buffers<CR>:buffer<Space>
+set wildchar=<Tab> wildmenu wildmode=full
 
 " switch buffers
 map <C-9> :bp<CR>
