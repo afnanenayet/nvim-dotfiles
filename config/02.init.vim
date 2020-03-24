@@ -137,3 +137,5 @@ function! Fzf_dev(qargs)
         \ 'options': '-m ' . l:fzf_files_options,
         \ 'down':    '40%' })
 endfunction
+
+let g:suda_smart_edit = 1

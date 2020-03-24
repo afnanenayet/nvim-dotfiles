@@ -33,6 +33,7 @@ call dein#add('neovimhaskell/haskell-vim')
 call dein#add('tpope/vim-eunuch')
 call dein#add('rust-lang/rust.vim')
 call dein#add('jlanzarotta/bufexplorer')
+call dein#add('lambdalisue/suda.vim')
 
 " exit dein
 call dein#end()
