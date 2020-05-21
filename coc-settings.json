@@ -71,5 +71,11 @@
     "coc.source.around.enable": false,
     "coc.source.buffer.enable": false,
     "python.jediEnabled": false,
-    "rust-analyzer.serverPath": "/usr/bin/rust-analyzer"
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "80"
+    ],
+    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+    "rust-analyzer.procMacro.enable": true,
 }

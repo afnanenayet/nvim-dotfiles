@@ -38,6 +38,9 @@ set expandtab
 set softtabstop=4 " softtabstop, makes spaces feel like tabs when deleting
 set cursorline
 
+" This will set folds disabled by default, but they can be toggled with zi
+set nofoldenable
+
 " enable mouse support
 set mouse=a mousemodel=popup
 
@@ -99,7 +102,7 @@ command! -nargs=? -complete=file Files call Fzf_dev(<q-args>)
 
 " Files w/preview
 function! Fzf_dev(qargs)
-  let l:fzf_files_options = '--preview "bat --theme="solarized" --style=numbers,changes --color always {} | head -'.&lines.'" --expect=ctrl-t,ctrl-v,ctrl-x --multi --bind=ctrl-a:select-all,ctrl-d:deselect-all'
+  let l:fzf_files_options = '--preview "bat --style=numbers,changes --color always {} | head -'.&lines.'" --expect=ctrl-t,ctrl-v,ctrl-x --multi --bind=ctrl-a:select-all,ctrl-d:deselect-all'
 
   function! s:files(dir)
     let l:cmd = $FZF_DEFAULT_COMMAND
