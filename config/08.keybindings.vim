@@ -35,8 +35,10 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -123,3 +125,9 @@ nnoremap s "_d
 
 " execute the current line as a command
 nnoremap <leader>e :exe getline(line('.'))<cr>
+
+" shortcut to edit shell config
+nnoremap <leader>sh :edit ~/.config/fish/config.fish<cr>
+
+" shortcut to edit neovim config
+nnoremap <leader>nv :edit ~/.config/nvim/config<cr>

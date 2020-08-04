@@ -64,11 +64,7 @@
     },
     "coc.source.around.enable": false,
     "coc.source.buffer.enable": false,
-    "python.jediEnabled": false,
+    "rust-analyzer.serverPath": "/usr/local/bin/rust-analyzer",
     "python.formatting.provider": "black",
-    "python.pythonPath": "python3",
-    "python.formatting.blackArgs": [
-        "--line-length",
-        "80"
-    ]
+    "python.pythonPath": "python3"
 }
