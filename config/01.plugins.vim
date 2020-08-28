@@ -5,15 +5,15 @@ endif
 " append to runtime path
 " Required:
 set runtimepath+=/usr/local/opt/fzf
-set runtimepath+=/Users/afnanenayet/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('/Users/afnanenayet/.cache/dein')
+if dein#load_state('~/.cache/dein')
     " Required:
-    call dein#begin('/Users/afnanenayet/.cache/dein')
+    call dein#begin('~/.cache/dein')
 
     " Let dein manage dein
     " Required:
-    call dein#add('/Users/afnanenayet/.cache/dein/repos/github.com/Shougo/dein.vim')
+    call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
     " add packages here, e.g:
     call dein#add('wsdjeg/dein-ui.vim')
@@ -43,9 +43,11 @@ if dein#load_state('/Users/afnanenayet/.cache/dein')
     call dein#add('jlanzarotta/bufexplorer')
     call dein#add('lambdalisue/suda.vim')
     call dein#add('godlygeek/tabular')
-    call dein#add('vimwiki/vimwiki')
     call dein#add('vim-pandoc/vim-pandoc')
     call dein#add('vim-pandoc/vim-pandoc-syntax')
+    call dein#add('mhinz/vim-startify')
+    call dein#add('octol/vim-cpp-enhanced-highlight')
+
     " Required:
     call dein#end()
     call dein#save_state()
