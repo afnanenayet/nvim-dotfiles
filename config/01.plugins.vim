@@ -47,6 +47,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('vim-pandoc/vim-pandoc-syntax')
     call dein#add('mhinz/vim-startify')
     call dein#add('octol/vim-cpp-enhanced-highlight')
+    call dein#add('cespare/vim-toml')
 
     " Required:
     call dein#end()

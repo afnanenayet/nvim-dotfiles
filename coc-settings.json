@@ -12,7 +12,7 @@
                 "~"
             ]
         },
-        "haskell": {
+        "hls": {
             "command": "haskell-language-server-wrapper",
             "args": [
                 "--lsp"
@@ -34,6 +34,12 @@
                 "languageServerHaskell": {}
             }
         },
+        "lisp": {
+            "command": "cl-lsp",
+            "filetypes": [
+                "lisp"
+            ]
+        },
         "ccls": {
             "command": "ccls",
             "filetypes": [
@@ -53,17 +59,8 @@
                 },
                 "client": {
                     "snippetSupport": true
-                },
-                "highlight": {
-                    "lsRanges": true
                 }
             }
-        },
-        "lisp": {
-            "command": "cl-lsp",
-            "filetypes": [
-                "lisp"
-            ]
         }
     },
     "coc.source.around.enable": false,
