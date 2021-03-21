@@ -1,17 +1,5 @@
 {
     "languageserver": {
-        "bash": {
-            "command": "bash-language-server",
-            "args": [
-                "start"
-            ],
-            "filetypes": [
-                "sh"
-            ],
-            "ignoredRootPaths": [
-                "~"
-            ]
-        },
         "hls": {
             "command": "haskell-language-server-wrapper",
             "args": [
@@ -34,14 +22,8 @@
                 "languageServerHaskell": {}
             }
         },
-        "lisp": {
-            "command": "cl-lsp",
-            "filetypes": [
-                "lisp"
-            ]
-        },
         "ccls": {
-            "command": "ccls",
+            "command": "/usr/local/opt/llvm/bin/clangd",
             "filetypes": [
                 "c",
                 "cpp",
@@ -61,11 +43,20 @@
                     "snippetSupport": true
                 }
             }
+        },
+        "lisp": {
+            "command": "cl-lsp",
+            "filetypes": [
+                "lisp"
+            ]
         }
     },
     "coc.source.around.enable": false,
     "coc.source.buffer.enable": false,
-    "rust-analyzer.serverPath": "/usr/local/bin/rust-analyzer",
+    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+    "rust-analyzer.procMacro.enable": true,
     "python.formatting.provider": "black",
-    "python.pythonPath": "python3"
+    "python.pythonPath": "python3",
+    "sh.highlightParsingErrors": true,
+    "rust-analyzer.server.path": "rust-analyzer"
 }

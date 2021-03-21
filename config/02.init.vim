@@ -4,7 +4,7 @@
 let g:python3_host_prog = '~/.local/share/nvim/.venv/bin/python3'
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set shell=/bin/sh
+set shell=/usr/local/bin/fish
 
 " Enable syntax highlighting
 syntax on
@@ -34,10 +34,13 @@ set clipboard+=unnamedplus
 " Tab = 4 spaces
 set tabstop=4
 set shiftwidth=4
-" set sta
 set expandtab
 set softtabstop=4 " softtabstop, makes spaces feel like tabs when deleting
-set cursorline
+
+" underline cursor instead of highlight
+set cursorline 
+" hi clear CursorLine
+" hi CursorLine gui=underline cterm=underline
 
 " This will set folds disabled by default, but they can be toggled with zi
 set nofoldenable
@@ -61,7 +64,7 @@ set grepprg=rg\ --vimgrep
 " Set colors in terminal
 " Solarized, dark, with true color support
 set termguicolors
-"set background=dark
+set background=dark
 colorscheme NeoSolarized
 
 " crontab filetype tweak (the way vim normally saves files confuses crontab
@@ -99,7 +102,7 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 " Overriding fzf.vim's default :Files command.  Pass zero or one args to Files
 " command (which are then passed to Fzf_dev). Supports file path completion
 " too.
-command! -nargs=? -complete=file Files call Fzf_dev(<q-args>)
+"command! -nargs=? -complete=file Files call Fzf_dev(<q-args>)
 
 " Files w/preview
 function! Fzf_dev(qargs)
@@ -143,3 +146,4 @@ function! Fzf_dev(qargs)
 endfunction
 
 let g:suda_smart_edit = 1
+let g:vimspector_enable_mappings = 'HUMAN'
