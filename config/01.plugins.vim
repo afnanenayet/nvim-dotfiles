@@ -15,7 +15,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 call plug#begin()
 
-Plug 'wsdjeg/dein-ui.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/vimshell'
 Plug 'Shougo/neco-syntax'
