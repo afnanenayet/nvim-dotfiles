@@ -2,62 +2,55 @@ if &compatible
     set nocompatible
 endif
 
-" append to runtime path
-" Required:
-set runtimepath+=/usr/local/opt/fzf
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-
-if dein#load_state('~/.cache/dein')
-    " Required:
-    call dein#begin('~/.cache/dein')
-
-    " Let dein manage dein
-    " Required:
-    call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-
-    " add packages here, e.g:
-    call dein#add('wsdjeg/dein-ui.vim')
-    call dein#add('sheerun/vim-polyglot')
-    call dein#add('Shougo/vimshell')
-    call dein#add('Shougo/neco-syntax')
-    call dein#add('Shougo/neoinclude.vim')
-    call dein#add('Shougo/neosnippet-snippets')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('vim-airline/vim-airline-themes')
-    call dein#add('scrooloose/nerdcommenter')
-    call dein#add('overcache/NeoSolarized')
-    call dein#add('neomutt/neomutt.vim')
-    call dein#add('junegunn/fzf.vim')
-    call dein#add('christoomey/vim-tmux-navigator')
-    call dein#add('jamessan/vim-gnupg')
-    call dein#add('justinmk/vim-dirvish')
-    call dein#add('neoclide/coc.nvim', {'rev': 'release'})
-    call dein#add('puremourning/vimspector', {'do' : 'python3 install_gadget.py --all'})
-    call dein#add('tpope/vim-fugitive')
-    call dein#add('neovimhaskell/haskell-vim')
-    call dein#add('tpope/vim-eunuch')
-    call dein#add('rust-lang/rust.vim')
-    call dein#add('jlanzarotta/bufexplorer')
-    call dein#add('lambdalisue/suda.vim')
-    call dein#add('godlygeek/tabular')
-    call dein#add('vim-pandoc/vim-pandoc')
-    call dein#add('vim-pandoc/vim-pandoc-syntax')
-    call dein#add('mhinz/vim-startify')
-    call dein#add('octol/vim-cpp-enhanced-highlight')
-    call dein#add('tpope/vim-sleuth')
-    call dein#add('lervag/wiki.vim')
-    call dein#add('christoomey/vim-conflicted')
-
-    " Required:
-    call dein#end()
-    call dein#save_state()
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+call plug#begin()
+
+Plug 'wsdjeg/dein-ui.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'Shougo/vimshell'
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'roxma/nvim-yarp'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdcommenter'
+Plug 'overcache/NeoSolarized'
+Plug 'neomutt/neomutt.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'jamessan/vim-gnupg'
+Plug 'justinmk/vim-dirvish'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'puremourning/vimspector', {'do' : 'python3 install_gadget.py --all'}
+Plug 'tpope/vim-fugitive'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'tpope/vim-eunuch'
+Plug 'rust-lang/rust.vim'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'lambdalisue/suda.vim'
+Plug 'godlygeek/tabular'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'mhinz/vim-startify'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'tpope/vim-sleuth'
+Plug 'lervag/wiki.vim'
+Plug 'christoomey/vim-conflicted'
+
+
+call plug#end()
 
 filetype plugin on
 syntax enable
-
-" auto-install missing packages on startup
-if dein#check_install()
-    call dein#install()
-endif
