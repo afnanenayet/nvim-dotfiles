@@ -10,12 +10,12 @@
 
 all:
 	echo "Copying files..."
-	cp -f $(HOME)/.config/nvim/init.vim .
-	cp -f $(HOME)/.config/nvim/filetype.vim .
-	cp -f $(HOME)/.config/nvim/coc-settings.json .
-	cp -rf $(HOME)/.config/nvim/config .
-	cp -rf $(HOME)/.config/nvim/ftplugin .
-	cp -rf $(HOME)/.config/nvim/ftdetect .
+	rsync -avz $(HOME)/.config/nvim/init.vim .
+	rsync -avz $(HOME)/.config/nvim/filetype.vim .
+	rsync -avz $(HOME)/.config/nvim/coc-settings.json .
+	rsync -avz $(HOME)/.config/nvim/config .
+	rsync -avz $(HOME)/.config/nvim/ftplugin .
+	rsync -avz $(HOME)/.config/nvim/ftdetect .
 	echo "Files have been copied successfully."
 
 install:
