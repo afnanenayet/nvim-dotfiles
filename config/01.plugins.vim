@@ -48,7 +48,6 @@ Plug 'tpope/vim-sleuth'
 Plug 'lervag/wiki.vim'
 Plug 'christoomey/vim-conflicted'
 
-
 call plug#end()
 
 filetype plugin on

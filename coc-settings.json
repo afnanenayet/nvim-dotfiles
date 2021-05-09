@@ -57,6 +57,7 @@
     "rust-analyzer.procMacro.enable": true,
     "python.formatting.provider": "black",
     "python.pythonPath": "python3",
+    "python.formatting.blackPath": "/usr/local/bin/black",
     "sh.highlightParsingErrors": true,
     "rust-analyzer.server.path": "rust-analyzer"
 }
