@@ -6,16 +6,19 @@
 # config. Note that the `install` target is destructive and will overwrite your
 # old config files.
 
+# The command and flags to use for rsyncing files
+rsync_cmd = rsync -az
+
 .PHONY: all
 
 all:
 	echo "Copying files..."
-	rsync -avz $(HOME)/.config/nvim/init.vim .
-	rsync -avz $(HOME)/.config/nvim/filetype.vim .
-	rsync -avz $(HOME)/.config/nvim/coc-settings.json .
-	rsync -avz $(HOME)/.config/nvim/config .
-	rsync -avz $(HOME)/.config/nvim/ftplugin .
-	rsync -avz $(HOME)/.config/nvim/ftdetect .
+	$(rsync_cmd) $(HOME)/.config/nvim/init.vim .
+	$(rsync_cmd) $(HOME)/.config/nvim/filetype.vim .
+	$(rsync_cmd) $(HOME)/.config/nvim/coc-settings.json .
+	$(rsync_cmd) $(HOME)/.config/nvim/config .
+	$(rsync_cmd) $(HOME)/.config/nvim/ftplugin .
+	$(rsync_cmd) $(HOME)/.config/nvim/ftdetect .
 	echo "Files have been copied successfully."
 
 install:
