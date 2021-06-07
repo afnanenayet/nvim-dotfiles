@@ -65,7 +65,7 @@ set grepprg=rg\ --vimgrep
 " Solarized, dark, with true color support
 set termguicolors
 set background=dark
-colorscheme NeoSolarized
+colorscheme solarized
 
 " crontab filetype tweak (the way vim normally saves files confuses crontab
 " so this workaround allows for editing

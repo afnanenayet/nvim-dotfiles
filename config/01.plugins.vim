@@ -1,3 +1,8 @@
+" Vim needs a POSIX compatible shell to work properly
+if &shell =~# 'fish$'
+    set shell=zsh
+endif
+
 if &compatible
     set nocompatible
 endif
@@ -24,7 +29,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdcommenter'
-Plug 'overcache/NeoSolarized'
+Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'neomutt/neomutt.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -47,6 +52,8 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-sleuth'
 Plug 'lervag/wiki.vim'
 Plug 'christoomey/vim-conflicted'
+Plug 'rhysd/vim-gfm-syntax'
+Plug 'dag/vim-fish'
 
 call plug#end()
 
