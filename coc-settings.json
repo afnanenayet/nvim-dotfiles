@@ -54,7 +54,6 @@
     "coc.source.around.enable": false,
     "coc.source.buffer.enable": false,
     "rust-analyzer.cargo.loadOutDirsFromCheck": true,
-    "rust-analyzer.procMacro.enable": true,
     "python.formatting.provider": "black",
     "python.pythonPath": "python3",
     "python.formatting.blackPath": "/usr/local/bin/black",

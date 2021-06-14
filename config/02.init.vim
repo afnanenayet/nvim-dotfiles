@@ -106,44 +106,53 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 
 " Files w/preview
 function! Fzf_dev(qargs)
-  let l:fzf_files_options = '--preview "bat --style=numbers,changes --color always {} | head -'.&lines.'" --expect=ctrl-t,ctrl-v,ctrl-x --multi --bind=ctrl-a:select-all,ctrl-d:deselect-all'
+    let l:fzf_files_options = '--preview "bat --style=numbers,changes --color always {} | head -'.&lines.'" --expect=ctrl-t,ctrl-v,ctrl-x --multi --bind=ctrl-a:select-all,ctrl-d:deselect-all'
 
-  function! s:files(dir)
-    let l:cmd = $FZF_DEFAULT_COMMAND
-    if a:dir != ''
-      let l:cmd .= ' ' . shellescape(a:dir)
-    endif
-    let l:files = split(system(l:cmd), '\n')
-    return s:prepend_icon(l:files)
-  endfunction
+    function! s:files(dir)
+        let l:cmd = $FZF_DEFAULT_COMMAND
+        if a:dir != ''
+            let l:cmd .= ' ' . shellescape(a:dir)
+        endif
+        let l:files = split(system(l:cmd), '\n')
+        return s:prepend_icon(l:files)
+    endfunction
 
-  function! s:prepend_icon(candidates)
-    let l:result = []
-    for l:candidate in a:candidates
-      let l:filename = fnamemodify(l:candidate, ':p:t')
-      call add(l:result, printf('%s', l:candidate))
-    endfor
+    function! s:prepend_icon(candidates)
+        let l:result = []
+        for l:candidate in a:candidates
+            let l:filename = fnamemodify(l:candidate, ':p:t')
+            call add(l:result, printf('%s', l:candidate))
+        endfor
 
-    return l:result
-  endfunction
+        return l:result
+    endfunction
 
-  function! s:edit_file(lines)
-    let l:cmd = get({'ctrl-x': 'split',
-                 \ 'ctrl-v': 'vertical split',
-                 \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
+    function! s:edit_file(lines)
+        let l:cmd = get({'ctrl-x': 'split',
+                    \ 'ctrl-v': 'vertical split',
+                    \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
 
-    for l:item in a:lines[1:]
-      let l:file_path = l:item
-      execute 'silent ' . l:cmd . ' ' . l:file_path
-    endfor
-  endfunction
+        for l:item in a:lines[1:]
+            let l:file_path = l:item
+            execute 'silent ' . l:cmd . ' ' . l:file_path
+        endfor
+    endfunction
 
-  call fzf#run({
-        \ 'source': <sid>files(a:qargs),
-        \ 'sink*':   function('s:edit_file'),
-        \ 'options': '-m ' . l:fzf_files_options,
-        \ 'down':    '40%' })
+    call fzf#run({
+                \ 'source': <sid>files(a:qargs),
+                \ 'sink*':   function('s:edit_file'),
+                \ 'options': '-m ' . l:fzf_files_options,
+                \ 'down':    '40%' })
 endfunction
 
 let g:suda_smart_edit = 1
 let g:vimspector_enable_mappings = 'HUMAN'
+
+" haskell.vim
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
