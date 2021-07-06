@@ -54,6 +54,7 @@ Plug 'lervag/wiki.vim'
 Plug 'christoomey/vim-conflicted'
 Plug 'rhysd/vim-gfm-syntax'
 Plug 'dag/vim-fish'
+Plug 'tpope/vim-eunuch'
 
 call plug#end()
 
