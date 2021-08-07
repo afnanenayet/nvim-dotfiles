@@ -55,6 +55,10 @@ Plug 'christoomey/vim-conflicted'
 Plug 'rhysd/vim-gfm-syntax'
 Plug 'dag/vim-fish'
 Plug 'tpope/vim-eunuch'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-surround'
+Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
