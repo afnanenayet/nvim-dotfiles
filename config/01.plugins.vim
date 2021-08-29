@@ -31,8 +31,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdcommenter'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'neomutt/neomutt.vim'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jamessan/vim-gnupg'
 Plug 'justinmk/vim-dirvish'
@@ -59,8 +57,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
+Plug 'wincent/loupe'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
-
-filetype plugin on
-syntax enable

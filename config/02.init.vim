@@ -3,6 +3,9 @@
 " contains misc startup settings for vim
 let g:python3_host_prog = '~/.local/share/nvim/.venv/bin/python3'
 
+filetype plugin on
+syntax enable
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set shell=/usr/local/bin/fish
 
@@ -23,6 +26,7 @@ set updatetime=300
 
 set nobackup
 set nowritebackup
+set signcolumn=number
 
 " Autoindentation
 set autoindent
@@ -159,3 +163,8 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 let g:sneak#label = 1
+
+:hi Search cterm=NONE ctermfg=grey ctermbg=blue
+
+" automatically remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e

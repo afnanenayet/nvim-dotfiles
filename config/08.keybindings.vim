@@ -20,6 +20,16 @@ nmap <silent> gc :call CocActionAsync('format')<CR>
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>rf <Plug>(coc-references)
 
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
 " fzy
 nnoremap <C-p> :Files<Cr>
 nnoremap <C-s> :RG<CR>
@@ -120,6 +130,11 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>h :split<CR>
 
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+
 " execute the current line as a command
 nnoremap <leader>e :exe getline(line('.'))<cr>
 
@@ -129,3 +144,7 @@ nnoremap <leader>sh :edit ~/.config/fish/config.fish<cr>
 " shortcut to edit neovim config
 nnoremap <leader>nv :edit ~/.config/nvim/config<cr>
 
+" Find files using Telescope command-line sugar.
+nnoremap <C-P> <cmd>Telescope find_files theme=get_dropdown<cr>
+nnoremap <C-S> <cmd>Telescope live_grep theme=get_dropdown<cr>
+nnoremap <leader>fb <cmd>Telescope buffers theme-get_dropdown<cr>
