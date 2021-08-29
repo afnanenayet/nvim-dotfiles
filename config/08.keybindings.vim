@@ -147,4 +147,4 @@ nnoremap <leader>nv :edit ~/.config/nvim/config<cr>
 " Find files using Telescope command-line sugar.
 nnoremap <C-P> <cmd>Telescope find_files theme=get_dropdown<cr>
 nnoremap <C-S> <cmd>Telescope live_grep theme=get_dropdown<cr>
-nnoremap <leader>fb <cmd>Telescope buffers theme-get_dropdown<cr>
+nnoremap <leader>fb <cmd>Telescope buffers theme=get_dropdown<cr>
