@@ -42,7 +42,7 @@ set expandtab
 set softtabstop=4 " softtabstop, makes spaces feel like tabs when deleting
 
 " underline cursor instead of highlight
-set cursorline 
+set cursorline
 " hi clear CursorLine
 " hi CursorLine gui=underline cterm=underline
 

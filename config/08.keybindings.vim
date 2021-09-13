@@ -30,11 +30,6 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
     vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
-" fzy
-nnoremap <C-p> :Files<Cr>
-nnoremap <C-s> :RG<CR>
-nnoremap <C-m> :Marks<CR>
-
 " neosnippets
 imap <C-l> <Plug>(coc-snippets-expand)
 imap <C-k> <Plug>(coc-snippets-expand-jump)
@@ -148,3 +143,13 @@ nnoremap <leader>nv :edit ~/.config/nvim/config<cr>
 nnoremap <C-P> <cmd>Telescope find_files theme=get_dropdown<cr>
 nnoremap <C-S> <cmd>Telescope live_grep theme=get_dropdown<cr>
 nnoremap <leader>fb <cmd>Telescope buffers theme=get_dropdown<cr>
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif

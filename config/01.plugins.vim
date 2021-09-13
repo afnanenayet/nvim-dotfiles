@@ -29,12 +29,12 @@ Plug 'roxma/nvim-yarp'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdcommenter'
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'ishan9299/nvim-solarized-lua'
 Plug 'neomutt/neomutt.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jamessan/vim-gnupg'
 Plug 'justinmk/vim-dirvish'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'puremourning/vimspector', {'do' : 'python3 install_gadget.py --all'}
 Plug 'tpope/vim-fugitive'
 Plug 'neovimhaskell/haskell-vim'
