@@ -33,7 +33,9 @@
             ],
             "rootPatterns": [
                 ".ccls-root",
-                "compile_commands.json"
+                "compile_commands.json",
+                "BUILD",
+                "CMakeLists.txt"
             ],
             "initializationOptions": {
                 "cache": {
@@ -51,12 +53,21 @@
             ]
         }
     },
+    "diagnostic-languageserver.filetypes": {
+        "sh": "shellcheck",
+        "vim": "vint"
+    },
+    "diagnostic-languageserver.formatFiletypes": {
+        "sh": "shfmt"
+    },
     "coc.source.around.enable": false,
     "coc.source.buffer.enable": false,
     "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+    "rust-analyzer.cargo.autoreload": true,
     "python.formatting.provider": "black",
     "python.pythonPath": "python3",
     "python.formatting.blackPath": "/usr/local/bin/black",
     "sh.highlightParsingErrors": true,
-    "rust-analyzer.server.path": "rust-analyzer"
+    "rust-analyzer.server.path": "rust-analyzer",
+    "markdown-preview-enhanced.liveUpdate": true
 }

@@ -35,7 +35,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'jamessan/vim-gnupg'
 Plug 'justinmk/vim-dirvish'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'puremourning/vimspector', {'do' : 'python3 install_gadget.py --all'}
 Plug 'tpope/vim-fugitive'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'tpope/vim-eunuch'
@@ -60,5 +59,11 @@ Plug 'justinmk/vim-sneak'
 Plug 'wincent/loupe'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-dap.nvim'
+Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-dap-python'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 call plug#end()

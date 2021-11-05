@@ -158,7 +158,7 @@ let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and 
 let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
 let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static'
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
@@ -168,3 +168,13 @@ let g:sneak#label = 1
 
 " automatically remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
+
+lua <<EOF
+    require('telescope').setup()
+    require("dap")
+    require("dapui").setup()
+    require("nvim-dap-virtual-text").setup()
+    require('telescope').load_extension('dap')
+    require('telescope').load_extension('fzy_native')
+EOF
+
