@@ -1,5 +1,3 @@
-set completeopt=noinsert,menuone,noselect
-set shortmess+=c
 
 " Enable the signcolumn for all filetypes that utilize diagnostics so there
 " isn't an annoying shift effect when there are errors

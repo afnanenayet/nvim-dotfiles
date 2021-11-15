@@ -69,5 +69,6 @@
     "python.formatting.blackPath": "/usr/local/bin/black",
     "sh.highlightParsingErrors": true,
     "rust-analyzer.server.path": "rust-analyzer",
+    "coc.preferences.promptInput": false,
     "markdown-preview-enhanced.liveUpdate": true
 }

@@ -1,5 +1,5 @@
 " vim powerline options
-let g:airline_theme='solarized'
+let g:airline_theme='onedark'
 
 " don't overwrite symbols if they already exist
 if !exists('g:airline_symbols')
