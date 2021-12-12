@@ -7,3 +7,8 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+lua << EOF
+require('telescope').setup()
+require('telescope').load_extension('fzf')
+EOF

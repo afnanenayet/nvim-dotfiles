@@ -6,4 +6,3 @@
 
 " syntax highlighting for latex blocks in markdown
 let g:pandoc#syntax#conceal#use = 0
-

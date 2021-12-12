@@ -1,3 +1,3 @@
 for f in split(glob('~/.config/nvim/config/*.vim'), '\n')
-	exe 'source' f
+    exe 'source' f
 endfor

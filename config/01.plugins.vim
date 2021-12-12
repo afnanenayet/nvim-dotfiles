@@ -44,8 +44,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-surround'
-Plug 'justinmk/vim-sneak'
-Plug 'wincent/loupe'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -57,12 +55,8 @@ Plug 'rcarriga/nvim-dap-ui'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'tpope/vim-rhubarb'
 Plug 'navarasu/onedark.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'simrat39/rust-tools.nvim'
-Plug 'ray-x/lsp_signature.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ggandor/lightspeed.nvim'
+Plug 'kevinhwang91/nvim-hlslens'
 
 call plug#end()
