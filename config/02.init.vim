@@ -43,18 +43,14 @@ set softtabstop=4 " softtabstop, makes spaces feel like tabs when deleting
 
 " underline cursor instead of highlight
 set cursorline
-" hi clear CursorLine
-" hi CursorLine gui=underline cterm=underline
+"hi clear CursorLine
+"hi CursorLine gui=underline cterm=underline
 
 " This will set folds disabled by default, but they can be toggled with zi
 set nofoldenable
 
 " enable mouse support
 set mouse=a mousemodel=popup
-
-" markdown file recognition
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd BufNewFile,BufReadPost *.md.html set filetype=markdown
 
 " relative line numbers
 " Sets relative line numbers in normal mode, absolute line numbers in insert
@@ -108,5 +104,5 @@ let g:suda_smart_edit = 1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let g:dashboard_default_executive = 'telescope'
 
-" set completeopt=menuone,noselect
-
+"set completeopt=menuone,noselect
+set shortmess+=c
