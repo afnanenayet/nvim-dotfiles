@@ -1,0 +1,6 @@
+{
+    "Lua.workspace.checkThirdParty": false,
+    "diagnostics.disable": [
+        "missing-fields"
+    ]
+}
