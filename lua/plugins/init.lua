@@ -1,6 +1,3 @@
--- Replaces the old `impatient` plugin.
-vim.loader.enable()
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -56,15 +53,14 @@ return {
     end
   },
   "tpope/vim-surround",
-  "tpope/vim-eunuch",
   "lambdalisue/suda.vim",
   "godlygeek/tabular",
   "goolord/alpha-nvim",
   "ahmedkhalf/project.nvim",
-  "nvim-lua/popup.nvim",
-  "Tastyep/structlog.nvim",
-  { "numToStr/Comment.nvim", config = true },
-  { "windwp/nvim-autopairs", config = true },
+  { "nvim-lua/popup.nvim",    lazy = true },
+  { "Tastyep/structlog.nvim", lazy = true },
+  { "numToStr/Comment.nvim",  config = true },
+  { "windwp/nvim-autopairs",  config = true },
   "p00f/nvim-ts-rainbow",
   { "sindrets/diffview.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true },
   "b0o/schemastore.nvim",
