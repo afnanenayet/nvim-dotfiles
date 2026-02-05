@@ -19,14 +19,26 @@ return {
 	{
 		-- Setup code mostly taken from: https://github.com/mrcjkb/haskell-tools.nvim
 		"mrcjkb/haskell-tools.nvim",
-		version = "^4", -- Recommended
-		ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+		version = "^6", -- Recommended
 		lazy = false, -- Plugin is already lazy
 		config = function()
 			vim.g.haskell_tools = {
 				hls = {
 					on_attach = function(client, bufnr)
 						require("user.lsp.handlers").on_attach(client, bufnr)
+						local opts = { noremap = true, silent = true, buffer = bufnr }
+						-- Hoogle search for the type signature of the definition under the cursor
+						vim.api.nvim_buf_set_keymap(
+							bufnr,
+							"n",
+							"<space>hs",
+							"<cmd> function() lua require('haskell-tools').hoogle.hoogle_signature() <cr>",
+							opts
+						)
+						-- Evaluate all code snippets
+						vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>ea", ":Hls evalAll", opts)
+						-- Toggle a GHCi repl for the current package
+						vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rr", ":Haskell repl toggle", opts)
 					end,
 				},
 			}
@@ -38,7 +50,6 @@ return {
 			"mfussenegger/nvim-dap",
 		},
 		version = "^6",
-		ft = { "rust" },
 		lazy = false,
 		-- priority = 500,
 		init = function()
@@ -48,6 +59,7 @@ return {
 					enable_clippy = false,
 					float_win_config = {
 						border = "solid",
+						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
 					},
 				},
 				-- LSP configuration
@@ -72,13 +84,6 @@ return {
 	-- optional `vim.uv` typings
 	{ "Bilal2453/luvit-meta", lazy = true },
 	-- lspconfig
-	{
-		"mason-org/mason.nvim",
-		config = true,
-		keys = {
-			{ "<leader>m", "<cmd>Mason<cr>", desc = "Mason" },
-		},
-	},
 	{
 		"mason-org/mason-lspconfig.nvim",
 		config = {

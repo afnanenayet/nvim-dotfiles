@@ -1,14 +1,18 @@
+---@diagnostic disable: undefined-global
 local icons = require("user.ui").icons
 
 return {
 	{
 		"olimorris/onedarkpro.nvim",
+		lazy = false,
 		priority = 2000, -- Ensure it loads first
 		config = function()
 			require("onedarkpro").setup({
 				options = {
 					cursorline = true,
 					highlight_inactive_windows = true,
+					transparency = false,
+					lualine_transparency = false,
 				},
 				styles = {
 					types = "NONE",
@@ -24,6 +28,9 @@ return {
 					parameters = "NONE",
 					conditionals = "italic",
 					virtual_text = "NONE",
+				},
+				highlights = {
+					SnacksPickerPrompt = { bg = "NONE" },
 				},
 			})
 			vim.cmd([[colorscheme onedark]])
@@ -42,7 +49,7 @@ return {
 			dashboard = {},
 			indent = {},
 			input = {},
-			notifier = {},
+			notifier = { enabled = false },
 			quickfile = {},
 			scroll = { enabled = false },
 			statuscolumn = {},
@@ -347,23 +354,17 @@ return {
 			options = {
 				diagnostics = "nvim_lsp",
 				always_show_bufferline = false,
+				custom_filter = function(buf_number)
+					local ft = vim.bo[buf_number].filetype
+					return ft ~= "oil" and ft ~= "fugitive"
+				end,
 			},
 		},
-		---@diagnostic disable-next-line: unused-local
-		custom_filter = function(buf_number, buf_numbers)
-			if vim.bo[buf_number].filetype ~= "oil" then
-				return true
-			end
-			if vim.bo[buf_number].filetype ~= "Fugitive" then
-				return true
-			end
-			return false
-		end,
 	},
 	-- statusline
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "SmiteshP/nvim-navic" },
+		dependencies = { "SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		---@diagnostic disable-next-line: unused-local
 		opts = function(plugin)
@@ -380,10 +381,10 @@ return {
 			})
 			return {
 				options = {
-					theme = "onedark",
+					theme = "auto",
 					globalstatus = true,
 					disabled_filetypes = { "dashboard", "alpha", "fugitive" },
-					section_separators = { left = "", right = "" },
+					section_separators = { left = " ", right = "" },
 				},
 				sections = {
 					lualine_a = { "mode" },
@@ -404,12 +405,15 @@ return {
 					},
 					lualine_x = {
 						{
+							"lsp_status",
+						},
+						{
 							"NoiceCommand",
 							function()
 								return require("noice").api.status.command.get()
 							end,
 							cond = function()
-								require("noice").api.status.command.has()
+								return require("noice").api.status.command.has()
 							end,
 						},
 						{
@@ -418,7 +422,7 @@ return {
 								return require("noice").api.status.mode.get()
 							end,
 							cond = function()
-								require("noice").api.status.mode.has()
+								return require("noice").api.status.mode.has()
 							end,
 						},
 						{
@@ -455,6 +459,7 @@ return {
 					"oil",
 					"overseer",
 					"mason",
+					"fugitive",
 				},
 			}
 		end,
@@ -494,11 +499,7 @@ return {
 		event = "VeryLazy",
 		priority = 900,
 		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
 			"rcarriga/nvim-notify",
 		},
 		opts = {
@@ -506,7 +507,6 @@ return {
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true,
 				},
 			},
 			routes = {
@@ -528,6 +528,24 @@ return {
 				long_message_to_split = true,
 				inc_rename = true,
 				lsp_doc_border = false,
+			},
+			views = {
+				cmdline_popup = {
+					border = {
+						style = "none",
+						padding = { 1, 1 },
+					},
+					filter_options = {},
+					win_options = {
+						winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+					},
+				},
+				hover = {
+					border = {
+						style = "solid",
+						padding = { 0, 0 },
+					},
+				},
 			},
 		},
     -- stylua: ignore
@@ -563,5 +581,20 @@ return {
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
 	{ "MunifTanjim/nui.nvim", lazy = true },
 	{ "kevinhwang91/nvim-hlslens", config = true },
+	{
+		"rcarriga/nvim-notify",
+		opts = {
+			background_colour = function()
+				local hl = vim.api.nvim_get_hl(0, { name = "NormalFloat", link = false })
+				if hl.bg then
+					return string.format("#%06x", hl.bg)
+				end
+				return "#1e222a" -- fallback for onedark
+			end,
+			-- render = "wrapped-compact",
+			stages = "fade",
+			timeout = 3000,
+		},
+	},
 	-- { "tris203/precognition.nvim",   config = true },
 }

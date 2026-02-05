@@ -1,31 +1,19 @@
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
+-- LuaSnip session management
+-- Unlink snippet nodes when leaving insert mode to prevent jumping back to old snippets
+local snip_ok, luasnip = pcall(require, "luasnip")
+if not snip_ok then
   return
 end
 
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  return
-end
+local unlinkgrp = vim.api.nvim_create_augroup("UnlinkSnippetOnModeChange", { clear = true })
 
-local unlinkgrp = vim.api.nvim_create_augroup(
-  'unlinksnippetonmodechange',
-  { clear = true }
-)
-
-vim.api.nvim_create_autocmd("modechanged", {
+vim.api.nvim_create_autocmd("ModeChanged", {
   group = unlinkgrp,
   pattern = { "s:n", "i:*" },
-  desc = "forget the current snippet when leaving the insert mode",
+  desc = "Forget the current snippet when leaving insert mode",
   callback = function(evt)
-    -- if we have n active nodes, n - 1 will still remain after a `unlink_current()` call.
-    -- we unlink all of them by wrapping the calls in a loop.
-    while true do
-      if luasnip.session and luasnip.session.current_nodes[evt.buf] and not luasnip.session.jump_active then
-        luasnip.unlink_current()
-      else
-        break
-      end
+    while luasnip.session and luasnip.session.current_nodes[evt.buf] and not luasnip.session.jump_active do
+      luasnip.unlink_current()
     end
   end,
 })
