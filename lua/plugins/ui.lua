@@ -368,33 +368,18 @@ return {
 		event = "VeryLazy",
 		---@diagnostic disable-next-line: unused-local
 		opts = function(plugin)
-			local trouble = require("trouble")
-			local symbols = trouble.statusline({
-				mode = "lsp_document_symbols",
-				groups = {},
-				title = false,
-				filter = { range = true },
-				format = "{kind_icon}{symbol.name:Normal}",
-				-- The following line is needed to fix the background color
-				-- Set it to the lualine section you want to use
-				hl_group = "lualine_c_normal",
-			})
 			return {
 				options = {
 					theme = "auto",
 					globalstatus = true,
-					disabled_filetypes = { "dashboard", "alpha", "fugitive" },
+					disabled_filetypes = { "dashboard", "fugitive" },
 					section_separators = { left = " ", right = "" },
 				},
 				sections = {
 					lualine_a = { "mode" },
 					lualine_b = { "branch" },
 					lualine_c = {
-						{
-							"diagnostics",
-							symbols.get,
-							cond = symbols.has,
-						},
+						"diagnostics",
 						{
 							"filetype",
 							icon_only = true,
@@ -458,7 +443,6 @@ return {
 					"mason",
 					"oil",
 					"overseer",
-					"mason",
 					"fugitive",
 				},
 			}

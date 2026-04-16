@@ -10,11 +10,22 @@ return {
     event = "VeryLazy",
     dependencies = {
       "rcarriga/nvim-dap-ui",
-      { "theHamsta/nvim-dap-virtual-text", opts = { commented = true }, lazy = true, },
+      { "theHamsta/nvim-dap-virtual-text", opts = { commented = true }, lazy = true },
+      {
+        "jay-babu/mason-nvim-dap.nvim",
+        dependencies = "mason-org/mason.nvim",
+        opts = {
+          ensure_installed = { "codelldb", "python" },
+          automatic_installation = true,
+          handlers = {},
+        },
+      },
     },
-    config = function(plugin, opts)
+    config = function()
       local dap = require("dap")
-      local mason_install_dir = vim.fn.resolve(vim.fn.stdpath("data") .. "/mason")
+      local dapui = require("dapui")
+
+      -- Lua / Neovim debugging
       dap.configurations.lua = {
         {
           type = "nlua",
@@ -39,35 +50,8 @@ return {
         callback({ type = "server", host = config.host, port = config.port })
       end
 
-      dap.adapters.codelldb = {
-        type = "server",
-        port = "${port}",
-        executable = {
-          command = vim.fn.resolve(mason_install_dir .. "/packages/codelldb/extension/adapter/codelldb"),
-          args = { "--port", "${port}" },
-        },
-      }
-
-      dap.configurations.cpp = {
-        {
-          name = "Launch file",
-          type = "codelldb",
-          request = "launch",
-          program = function()
-            return vim.fn.input("Path to executable: " .. vim.fn.getcwd() .. "/" .. "file")
-          end,
-          cwd = "${workspaceFolder}",
-          stopOnEntry = false,
-        },
-      }
-      dap.configurations.c = dap.configurations.cpp
-      local dapui = require("dapui")
-      -- dapui.setup()
-
-      -- we set a listener on the event breakpoint as a workaround for an error where
-      -- the DAP UI kept closing immediately after loading a file. Waiting for the
-      -- breakpoint should give it enough time to generate the source maps.
-      dap.listeners.after.event_breakpoint["dapui_config"] = function()
+      -- Auto open/close DAP UI
+      dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
       end
       dap.listeners.before.event_terminated["dapui_config"] = function()
@@ -78,11 +62,34 @@ return {
       end
     end,
     keys = {
-      { "<leader>de", "<cmd>:lua require('dapui').close()<cr>", desc = "Close DAP UI" },
-      { "<leader>do", "<cmd>:lua require('dapui').open()<cr>",  desc = "Open DAP UI" },
-      { "<leader>db", "<cmd>:DapToggleBreakpoint<cr>",          desc = "Toggle breakpoint" },
-      { "<leader>dr", "<cmd>:DapToggleRepl<cr>",                desc = "Toggle REPL" },
-      { "<leader>dc", "<cmd>Telescope dap configurations<cr>",  desc = "DAP configs" },
-    }
+      { "<leader>db", function() require("dap").toggle_breakpoint() end,                                    desc = "Toggle breakpoint" },
+      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Conditional breakpoint" },
+      { "<leader>dc", function() require("dap").continue() end,                                             desc = "Continue / Start" },
+      { "<leader>dC", function() require("dap").run_to_cursor() end,                                        desc = "Run to cursor" },
+      { "<leader>di", function() require("dap").step_into() end,                                            desc = "Step into" },
+      { "<leader>do", function() require("dap").step_over() end,                                            desc = "Step over" },
+      { "<leader>dO", function() require("dap").step_out() end,                                             desc = "Step out" },
+      { "<leader>dp", function() require("dap").pause() end,                                                desc = "Pause" },
+      { "<leader>dt", function() require("dap").terminate() end,                                            desc = "Terminate" },
+      { "<leader>dr", function() require("dap").repl.toggle() end,                                          desc = "Toggle REPL" },
+      { "<leader>dl", function() require("dap").run_last() end,                                             desc = "Run last" },
+      { "<leader>de", function() require("dapui").close() end,                                               desc = "Close DAP UI" },
+      { "<leader>du", function() require("dapui").open() end,                                                desc = "Open DAP UI" },
+      { "<leader>dw", function() require("dapui").toggle() end,                                              desc = "Toggle DAP UI" },
+      { "<F5>",       function() require("dap").continue() end,                                             desc = "Continue / Start" },
+      { "<F10>",      function() require("dap").step_over() end,                                            desc = "Step over" },
+      { "<F11>",      function() require("dap").step_into() end,                                            desc = "Step into" },
+      { "<S-F11>",    function() require("dap").step_out() end,                                             desc = "Step out" },
+    },
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    dependencies = { "mfussenegger/nvim-dap" },
+    config = function()
+      -- mason installs debugpy here
+      local mason_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
+      require("dap-python").setup(mason_path)
+    end,
   },
 }

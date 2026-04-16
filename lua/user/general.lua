@@ -7,6 +7,7 @@ local options = {
 	ignorecase = true, -- ignore case in search patterns
 	mouse = "a", -- allow the mouse to be used in neovim
 	pumheight = 10, -- pop up menu height
+	completeopt = "menuone,noselect,popup",
 	showmode = false, -- we don't need to see things like -- INSERT -- anymore
 	showtabline = 2, -- always show tabs
 	smartcase = true, -- smart case
@@ -48,7 +49,7 @@ local options = {
 	-- TODO: want to only enable this where buffers can connect to an LSP
 	-- otherwise we'll have wasted space for things like git commits and random windows
 	-- winbar = " ",
-	winborder = "solid",
+	-- winborder = "solid",
 }
 
 vim.opt.shortmess:append("c")
@@ -63,3 +64,12 @@ vim.g.python3_host_prog = vim.fn.expand("~/.virtualenvs/neovim/bin/python3")
 -- Example for configuring Neovim to load user-installed installed Lua rocks:
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+
+-- Force-stop all LSP clients before exiting to prevent shutdown hangs
+vim.api.nvim_create_autocmd("VimLeavePre", {
+	callback = function()
+		for _, client in ipairs(vim.lsp.get_clients()) do
+			client:stop(true)
+		end
+	end,
+})

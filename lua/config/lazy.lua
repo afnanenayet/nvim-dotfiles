@@ -48,10 +48,10 @@ require("lazy").setup({
     enabled = true,
     root = vim.fn.stdpath("data") .. "/lazy-rocks",
     server = "https://nvim-neorocks.github.io/rocks-binaries/",
-    hererocks = true,
+    hererocks = false,
   },
-  rtp = {
-    performance = {
+  performance = {
+    rtp = {
       disabled_plugins = {
         "gzip",
         "netrwPlugin",

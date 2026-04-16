@@ -6,11 +6,6 @@ return {
 		opts = { preset = "classic" },
 	},
 	{
-		"folke/neoconf.nvim",
-		config = true,
-		lazy = false,
-	},
-	{
 		"Civitasv/cmake-tools.nvim",
 		opts = {},
 		lazy = true,
@@ -19,7 +14,7 @@ return {
 	{
 		-- Setup code mostly taken from: https://github.com/mrcjkb/haskell-tools.nvim
 		"mrcjkb/haskell-tools.nvim",
-		version = "^6", -- Recommended
+		version = "^9", -- Recommended
 		lazy = false, -- Plugin is already lazy
 		config = function()
 			vim.g.haskell_tools = {
@@ -28,17 +23,13 @@ return {
 						require("user.lsp.handlers").on_attach(client, bufnr)
 						local opts = { noremap = true, silent = true, buffer = bufnr }
 						-- Hoogle search for the type signature of the definition under the cursor
-						vim.api.nvim_buf_set_keymap(
-							bufnr,
-							"n",
-							"<space>hs",
-							"<cmd> function() lua require('haskell-tools').hoogle.hoogle_signature() <cr>",
-							opts
-						)
+						vim.keymap.set("n", "<space>hs", function()
+							require("haskell-tools").hoogle.hoogle_signature()
+						end, opts)
 						-- Evaluate all code snippets
-						vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>ea", ":Hls evalAll", opts)
+						vim.keymap.set("n", "<space>ea", "<cmd>Hls evalAll<cr>", opts)
 						-- Toggle a GHCi repl for the current package
-						vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rr", ":Haskell repl toggle", opts)
+						vim.keymap.set("n", "<leader>rr", "<cmd>Haskell repl toggle<cr>", opts)
 					end,
 				},
 			}
@@ -49,7 +40,7 @@ return {
 		dependencies = {
 			"mfussenegger/nvim-dap",
 		},
-		version = "^6",
+		version = "^9",
 		lazy = false,
 		-- priority = 500,
 		init = function()
@@ -57,10 +48,10 @@ return {
 				tools = {
 					-- Clippy can add a lot of delay.
 					enable_clippy = false,
-					float_win_config = {
-						border = "solid",
-						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
-					},
+					-- float_win_config = {
+					-- 	border = "solid",
+					-- 	winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+					-- },
 				},
 				-- LSP configuration
 				server = {
@@ -68,7 +59,14 @@ return {
 						require("user.lsp.handlers").on_attach(client, bufnr)
 						local keymap_opts = { noremap = true, silent = true }
 						vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>la", ":RustLsp codeAction<cr>", keymap_opts)
-						vim.api.nvim_buf_set_keymap(bufnr, "n", "K", ":RustLsp hover actions<cr>", keymap_opts)
+						vim.keymap.set(
+							"n",
+							"K", -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+							function()
+								vim.cmd.RustLsp({ "hover", "actions" })
+							end,
+							keymap_opts
+						)
 					end,
 					---@param project_root string Path to the project root
 					settings = function(project_root)
@@ -86,9 +84,9 @@ return {
 	-- lspconfig
 	{
 		"mason-org/mason-lspconfig.nvim",
-		config = {
+		opts = {
 			automatic_enable = {
-				exclude = { "rust_analyzer" },
+				exclude = { "rust_analyzer", "hls" },
 			},
 		},
 		dependencies = {
@@ -119,7 +117,7 @@ return {
 			diagnostics = {
 				severity_sort = true,
 				virtual_text = false,
-				update_in_insert = true,
+				update_in_insert = false,
 				underline = true,
 				-- not using in favor of tiny-inline-diagnostic
 				-- virtual_lines = { current_line = true },
@@ -190,11 +188,11 @@ return {
 				marksman = {},
 				bashls = {},
 				jsonls = {},
-				taplo = {},
+				tombi = {},
 				cmake = {},
-				rnix = {},
+				nixd = {},
 				hls = { mason = false },
-				basedpyright = {},
+				pyrefly = {},
 				html = {},
 				lua_ls = {
 					settings = {
@@ -232,34 +230,39 @@ return {
 			vim.diagnostic.config(opts.diagnostics)
 			local servers = opts.servers
 			local capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
-			local function setup(server)
-				local server_opts = vim.tbl_deep_extend("force", {
-					capabilities = vim.deepcopy(capabilities),
-					on_attach = require("user.lsp.handlers").on_attach,
-				}, servers[server] or {})
-
-				if opts.setup[server] then
-					if opts.setup[server](server, server_opts) then
-						return
-					end
-				elseif opts.setup["*"] then
-					if opts.setup["*"](server, server_opts) then
-						return
-					end
-				end
-				vim.lsp.config(server, server_opts)
-				vim.lsp.enable(server)
-			end
 
 			local mlsp = require("mason-lspconfig")
 			local available = mlsp.get_available_servers()
+
 			for server, server_opts in pairs(servers) do
 				if server_opts then
 					server_opts = server_opts == true and {} or server_opts
-					-- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-					if server_opts.mason == false or not vim.tbl_contains(available, server) then
-						setup(server)
+
+					local merged = vim.tbl_deep_extend("force", {
+						capabilities = vim.deepcopy(capabilities),
+						on_attach = require("user.lsp.handlers").on_attach,
+					}, server_opts)
+
+					-- Allow custom setup functions to override or skip a server
+					if opts.setup[server] then
+						if opts.setup[server](server, merged) then
+							goto continue
+						end
+					elseif opts.setup["*"] then
+						if opts.setup["*"](server, merged) then
+							goto continue
+						end
 					end
+
+					-- Set config for all servers (capabilities, on_attach, settings)
+					vim.lsp.config(server, merged)
+
+					-- Only manually enable non-mason servers; mason-lspconfig handles the rest
+					if server_opts.mason == false or not vim.tbl_contains(available, server) then
+						vim.lsp.enable(server)
+					end
+
+					::continue::
 				end
 			end
 		end,
@@ -308,7 +311,6 @@ return {
 				"rust-analyzer",
 				"clangd",
 				"bash-language-server",
-				"basedpyright",
 			},
 		},
 		---@diagnostic disable-next-line: undefined-doc-name, unused-local

@@ -94,12 +94,12 @@ return {
         end)
 
         -- Actions
-        map("n", "<leader>gs", gs.stage_hunk, { desc = "Stage hunk" })
-        map("n", "<leader>gr", gs.reset_hunk, { desc = "Reset hunk" })
-        map("v", "<leader>gs", function()
+        map("n", "<leader>ghs", gs.stage_hunk, { desc = "Stage hunk" })
+        map("n", "<leader>ghr", gs.reset_hunk, { desc = "Reset hunk" })
+        map("v", "<leader>ghs", function()
           gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end, { desc = "Stage hunk" })
-        map("v", "<leader>gr", function()
+        map("v", "<leader>ghr", function()
           gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end, { desc = "Reset hunk" })
         map("n", "<leader>gS", gs.stage_buffer, { desc = "Stage buffer" })

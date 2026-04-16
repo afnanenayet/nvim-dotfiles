@@ -1,45 +1,41 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     lazy = false,
-    cmd = "TSUpdate",
+    build = ":TSUpdate",
     priority = 900,
-    config = function(_, _)
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "c",
-          "cpp",
-          "vim",
-          "vimdoc",
-          "query",
-          "markdown",
-          "markdown_inline",
-          "haskell",
-          "typst",
-          "rust",
-          "bash",
-        },
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        autopairs = {
-          enable = true,
-        },
-        indent = {
-          enable = true,
-          disable = { "python", "css", "rust" },
-        },
+    config = function()
+      require("nvim-treesitter").install({
+        "c",
+        "cpp",
+        "vim",
+        "vimdoc",
+        "query",
+        "markdown",
+        "markdown_inline",
+        "haskell",
+        "typst",
+        "rust",
+        "bash",
+      })
+
+      local indent_disabled = { python = true, css = true, rust = true }
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          if pcall(vim.treesitter.start, args.buf) then
+            if not indent_disabled[vim.bo[args.buf].filetype] then
+              vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
+          end
+        end,
       })
     end,
   },
   "tpope/vim-surround",
   "lambdalisue/suda.vim",
   "godlygeek/tabular",
-  "goolord/alpha-nvim",
-  "ahmedkhalf/project.nvim",
   { "Tastyep/structlog.nvim", lazy = true },
-  { "numToStr/Comment.nvim",  config = true },
   { "windwp/nvim-autopairs",  config = true },
   { "sindrets/diffview.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true },
   "b0o/schemastore.nvim",

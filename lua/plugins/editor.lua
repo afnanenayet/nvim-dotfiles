@@ -13,16 +13,16 @@ return {
 
 	-- search/replace in multiple files
 	{
-		"windwp/nvim-spectre",
-		cmd = "Spectre",
-		opts = { open_cmd = "noswapfile vnew" },
+		"MagicDuck/grug-far.nvim",
+		cmd = "GrugFar",
+		opts = {},
 		keys = {
 			{
 				"<leader>sr",
 				function()
-					require("spectre").open()
+					require("grug-far").open()
 				end,
-				desc = "Replace in files (Spectre)",
+				desc = "Replace in files (grug-far)",
 			},
 		},
 	},
@@ -43,8 +43,10 @@ return {
 				},
 				{
 					"<leader>a",
-					"<cmd>Alpha<cr>",
-					desc = "Alpha",
+					function()
+						Snacks.dashboard()
+					end,
+					desc = "Dashboard",
 				},
 				{
 					"<leader>c",
@@ -189,7 +191,6 @@ return {
       { "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
     },
 	},
-	{ "anuvyklack/hydra.nvim" },
 	{
 		"otavioschwanck/arrow.nvim",
 		opts = {
