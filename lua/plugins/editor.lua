@@ -2,8 +2,8 @@
 return {
 	-- file explorer
 	{
-		"stevearc/oil.nvim",
-		cmd = "Oil",
+		"barrettruth/canola.nvim",
+		-- cmd = "Oil",
 		config = function()
 			require("oil").setup({ keymaps = { ["q"] = "actions.close" } })
 			vim.g.loaded_netrw = 1
