@@ -274,7 +274,6 @@ return {
 		opts = {
 			-- Define your formatters
 			formatters_by_ft = {
-				python = { "isort", "black" },
 				yaml = { "prettier" },
 			},
 		},
@@ -311,6 +310,10 @@ return {
 				"rust-analyzer",
 				"clangd",
 				"bash-language-server",
+				"ruff",
+				"lua-language-server",
+				"pyrefly",
+				"tombi",
 			},
 		},
 		---@diagnostic disable-next-line: undefined-doc-name, unused-local

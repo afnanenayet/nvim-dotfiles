@@ -345,6 +345,7 @@ return {
 	-- bufferline
 	{
 		"akinsho/bufferline.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		keys = {
 			{ "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
@@ -355,8 +356,11 @@ return {
 				diagnostics = "nvim_lsp",
 				always_show_bufferline = false,
 				custom_filter = function(buf_number)
-					local ft = vim.bo[buf_number].filetype
-					return ft ~= "oil" and ft ~= "fugitive"
+					if vim.bo[buf_number].buftype ~= "" then
+						return false
+					end
+					local name = vim.api.nvim_buf_get_name(buf_number)
+					return not name:match("^%w[%w+.-]*://")
 				end,
 			},
 		},
