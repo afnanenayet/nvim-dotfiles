@@ -454,6 +454,7 @@ return {
 	},
 	{
 		"Bekaboo/dropbar.nvim",
+		event = "VeryLazy",
 		config = true,
 		opts = {
 			bar = {
@@ -568,9 +569,10 @@ return {
 	},
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
 	{ "MunifTanjim/nui.nvim", lazy = true },
-	{ "kevinhwang91/nvim-hlslens", config = true },
+	{ "kevinhwang91/nvim-hlslens", event = "VeryLazy", config = true },
 	{
 		"rcarriga/nvim-notify",
+		event = "VeryLazy",
 		opts = {
 			background_colour = function()
 				local hl = vim.api.nvim_get_hl(0, { name = "NormalFloat", link = false })

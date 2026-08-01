@@ -7,7 +7,7 @@ local options = {
   ignorecase = true,         -- ignore case in search patterns
   mouse = "a",               -- allow the mouse to be used in neovim
   pumheight = 10,            -- pop up menu height
-  completeopt = "menuone,noselect,popup",
+  completeopt = "menuone,noselect",
   showmode = false,          -- we don't need to see things like -- INSERT -- anymore
   showtabline = 2,           -- always show tabs
   smartcase = true,          -- smart case
@@ -46,10 +46,10 @@ local options = {
   -- TODO: want to only enable this where buffers can connect to an LSP
   -- otherwise we'll have wasted space for things like git commits and random windows
   -- winbar = " ",
-  -- winborder = "solid",
+  winborder = "solid",
   foldenable = true,
   foldmethod = "expr",
-  foldexpr = "v:lua.vim.treesitter.foldexpr()",
+  foldexpr = "v:lua.vim.lsp.foldexpr()",
   foldtext = "",
   fillchars = {
     fold = " ",

@@ -130,12 +130,31 @@ return {
 		},
 	},
 	{
-		"yannvanhalewyn/jujutsu.nvim",
-		dependencies = { "dlyongemallo/diffview.nvim" },
+		"NicolasGB/jj.nvim",
+		version = "*",
+		event = "VeryLazy",
+		picker = {
+			-- Here you can pass the options as you would for snacks.
+			-- It will be used when using the picker
+			snacks = {},
+		},
+		dependencies = {
+			"dlyongemallo/diffview.nvim",
+			"folke/snacks.nvim",
+		},
 		config = function()
-			require("jujutsu-nvim").setup({
-				diff_preset = "diffview",
+			require("jj").setup({
+				diff = {
+					backend = "diffview",
+				},
 			})
+		end,
+	},
+	{
+		"evanphx/jjsigns.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("jjsigns").setup()
 		end,
 	},
 }

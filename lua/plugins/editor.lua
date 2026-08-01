@@ -37,7 +37,7 @@ return {
 				{
 					"<leader>d",
 					function()
-						require("which-key").show({ "<header>d", loop = true })
+						require("which-key").show({ "<leader>d", loop = true })
 					end,
 					desc = "DAP",
 				},
@@ -193,6 +193,7 @@ return {
 	},
 	{
 		"otavioschwanck/arrow.nvim",
+		event = "VeryLazy",
 		opts = {
 			show_icons = true,
 			leader_key = ";", -- Recommended to be a single key

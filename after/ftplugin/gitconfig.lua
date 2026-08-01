@@ -1,1 +1,1 @@
-vim.cmd[["TSBufDisable highlight"]]
+vim.treesitter.stop()

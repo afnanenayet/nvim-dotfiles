@@ -187,11 +187,17 @@ return {
 				texlab = {},
 				marksman = {},
 				bashls = {},
-				jsonls = {},
+				jsonls = {
+					settings = {
+						json = {
+							validate = { enable = true },
+						},
+					},
+				},
 				tombi = {},
 				cmake = {},
 				nixd = {},
-				hls = { mason = false },
+				hls = {},
 				pyrefly = {},
 				html = {},
 				lua_ls = {
@@ -214,6 +220,13 @@ return {
 				clangd = function(_, _)
 					local clangd = require("clangd_extensions")
 					clangd.setup()
+					return false
+				end,
+				jsonls = function(_, opts)
+					opts.settings = opts.settings or {}
+					opts.settings.json = opts.settings.json or {}
+					opts.settings.json.schemas = opts.settings.json.schemas or {}
+					vim.list_extend(opts.settings.json.schemas, require("schemastore").json.schemas())
 					return false
 				end,
 				rust_analyzer = function(_, _)

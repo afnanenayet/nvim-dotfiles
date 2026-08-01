@@ -5,10 +5,8 @@ local function lsp_keymaps(bufnr)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
   end
   -- Navigation handled by Snacks picker (gd, gI, gy, gr) in ui.lua
+  -- K, [d, ]d are Neovim 0.11+ defaults; not redefined here
   map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
-  map("n", "K", vim.lsp.buf.hover, "Hover")
-  map("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, "Previous diagnostic")
-  map("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, "Next diagnostic")
   map("n", "gl", function()
     vim.diagnostic.open_float({ border = "solid" })
   end, "Show diagnostic")
