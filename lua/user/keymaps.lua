@@ -40,7 +40,15 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- trouble
-keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", opts)
+-- Override Neovim's built-in LSP defaults (:h grr, :h gri, :h grt, :h gO), which
+-- otherwise fall back to the quickfix list, with the Trouble equivalents. These are
+-- generic LSP client operations, so this applies to every attached server (including
+-- rust_analyzer/hls via rustaceanvim/haskell-tools) with no per-plugin wiring needed.
+keymap("n", "gR", "<cmd>Trouble lsp_references toggle<cr>", opts)
+keymap("n", "grr", "<cmd>Trouble lsp_references toggle<cr>", opts)
+keymap("n", "gri", "<cmd>Trouble lsp_implementations toggle<cr>", opts)
+keymap("n", "grt", "<cmd>Trouble lsp_type_definitions toggle<cr>", opts)
+keymap("n", "gO", "<cmd>Trouble symbols toggle<cr>", opts)
 
 -- folds
 -- vim.keymap.set("n", "zR", require("ufo").openAllFolds)

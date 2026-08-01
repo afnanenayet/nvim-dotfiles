@@ -14,14 +14,25 @@ return {
 	{
 		-- Setup code mostly taken from: https://github.com/mrcjkb/haskell-tools.nvim
 		"mrcjkb/haskell-tools.nvim",
-		version = "^9", -- Recommended
+		version = "^10", -- Recommended
 		lazy = false, -- Plugin is already lazy
 		config = function()
 			vim.g.haskell_tools = {
+				-- Match the vanilla LSP hover window (vim.o.winborder = "solid", see general.lua)
+				tools = {
+					hover = {
+						border = "solid",
+					},
+				},
 				hls = {
 					on_attach = function(client, bufnr)
 						require("user.lsp.handlers").on_attach(client, bufnr)
 						local opts = { noremap = true, silent = true, buffer = bufnr }
+						-- Override Neovim's built-in hover keymap with haskell-tools' hover actions
+						-- (Hoogle search, open docs/source, go to definition/type definition, references)
+						vim.keymap.set("n", "K", function()
+							vim.cmd.Haskell({ "hover" })
+						end, opts)
 						-- Hoogle search for the type signature of the definition under the cursor
 						vim.keymap.set("n", "<space>hs", function()
 							require("haskell-tools").hoogle.hoogle_signature()
@@ -48,10 +59,11 @@ return {
 				tools = {
 					-- Clippy can add a lot of delay.
 					enable_clippy = false,
-					-- float_win_config = {
-					-- 	border = "solid",
-					-- 	winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
-					-- },
+					-- Match the vanilla LSP hover window (vim.o.winborder = "solid", see general.lua)
+					float_win_config = {
+						border = "solid",
+						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+					},
 				},
 				-- LSP configuration
 				server = {
@@ -65,7 +77,10 @@ return {
 							function()
 								vim.cmd.RustLsp({ "hover", "actions" })
 							end,
-							keymap_opts
+							-- Must be buffer-local: Neovim 0.11+ sets its own buffer-local `K` -> hover
+							-- default before on_attach runs, and buffer-local mappings always beat
+							-- global ones, so a global override here would be silently shadowed.
+							{ noremap = true, silent = true, buffer = bufnr }
 						)
 					end,
 					---@param project_root string Path to the project root

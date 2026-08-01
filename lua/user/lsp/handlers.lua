@@ -6,7 +6,10 @@ local function lsp_keymaps(bufnr)
   end
   -- Navigation handled by Snacks picker (gd, gI, gy, gr) in ui.lua
   -- K, [d, ]d are Neovim 0.11+ defaults; not redefined here
-  map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+  -- grr/gri/grt/gO -> Trouble, set globally in user/keymaps.lua (not buffer-local: they
+  -- have no non-LSP meaning to preserve). gD keeps its buffer-local scope so Vim's native
+  -- "go to global declaration" motion still works outside LSP-attached buffers.
+  map("n", "gD", "<cmd>Trouble lsp_declarations toggle<cr>", "Go to declaration (Trouble)")
   map("n", "gl", function()
     vim.diagnostic.open_float({ border = "solid" })
   end, "Show diagnostic")
